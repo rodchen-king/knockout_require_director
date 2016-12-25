@@ -19,6 +19,11 @@ var paths = {
     //Knockout
     'KnockoutIntroduction-html': 'templates/knockout/KnockoutIntroduction.html',
     'KnockoutIntroduction-js': 'Scripts/app/knockout/KnockoutIntroduction',
+
+    //Director
+    'Router': 'Scripts/lib/director',
+    'Routes': 'Scripts/framework/routes',
+    'AppRouter': 'Scripts/framework/router'
 };
 
 var baseUrl = '/';
@@ -27,6 +32,9 @@ require.config({
     baseUrl: baseUrl,
     paths: paths,
     shim: {
+        'Router': {
+            exports: 'Router'
+        }
     }
 });
 
@@ -38,14 +46,6 @@ require(["knockout", "KnockoutIntroduction-js", "knockout-amd-helpers", "text"],
     ko.applyBindings(knockoutIntroduction);
 });
 
-//require(["jquery", "RequireIntroduction-js", "text!RequireIntroduction-html"],
-//    function ($, module, html) {
-//        console.log("Start test require html!");
-//        $('#main').html(html);
-//        console.log("Start test require js!");
-//        module.TestRequireJs();
-//    }
-//);
-
-
-
+require(['AppRouter'], function () {
+    console.log('Start test router'); 
+})

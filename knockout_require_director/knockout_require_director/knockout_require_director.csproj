@@ -230,6 +230,9 @@
     <Content Include="Scripts\app\knockout\KnockoutIntroduction.js" />
     <Content Include="Scripts\app\require\RequireIntroduction.js" />
     <Content Include="Scripts\framework\main.js" />
+    <Content Include="Scripts\framework\router.js" />
+    <Content Include="Scripts\framework\routes.js" />
+    <Content Include="Scripts\lib\director.js" />
     <Content Include="Scripts\lib\jquery-1.7.1.js" />
     <Content Include="Scripts\lib\jquery.js" />
     <Content Include="Scripts\lib\knockout-amd-helpers.js" />

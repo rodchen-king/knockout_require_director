@@ -1,0 +1,79 @@
+<html>
+ <head></head>
+ <body>
+  <div> 
+   <div class="cnblogs_code"> 
+    <pre>
+ /*
+    Author: rodchen
+    Date: 2016/11/17
+    Description: It's the main entry point for require.
+ */
+
+var paths = {
+/* TODO: register all AMD modules by providing CamelCase aliases, exceptions are RequireJS plugins and named AMD modules, whose names are fixed */
+/* follow files dictionary order */
+'common': 'Scripts/common',
+'jquery': 'Scripts/lib/jquery',
+'Routes': 'Scripts/framework/routes',
+
+'knockout': 'Scripts/lib/knockout',
+
+//framework
+'Router': 'Scripts/lib/director',
+'app': 'Scripts/framework/page',
+'AppRouter': 'Scripts/framework/router',
+'Error-js': 'Scripts/app/Error',
+'Error-html': 'templates/Error-html.html',
+'Index-html': 'templates/Index-html.html',
+&quot;knockout-amd-helpers&quot;: &quot;Scripts/lib/knockout-amd-helpers&quot;,
+&quot;text&quot;: &quot;Scripts/lib/text&quot;,
+&quot;Index-js&quot;: 'Scripts/app/index',
+'fPI3': &quot;Scripts/lib/fPI3&quot;,
+'dropdown': 'Scripts/lib/dropdown',
+
+//bootstrap
+'Custom': 'Scripts/lib/custom',
+'Bootstrap': 'Scripts/lib/bootstrap.min',
+
+//app
+ 'Matouqiang-js': 'Scripts/app/matouqiang',
+ 'Zhanshi-js': 'Script/app/zhanshi'
+};
+
+var baseUrl = './';
+
+require.config({
+	baseUrl: baseUrl,
+	paths: paths,
+
+	shim: {
+		/* TODO: provide all needed shims for non-AMD modules */
+		'Router': {
+			exports: 'Router'
+		},
+		'Custom': {
+            exports: 'Custom'
+		},
+		'Custom': ['Bootstrap'],
+		'Bootstrap': ['jquery'],
+
+	}
+});
+
+require([&quot;knockout&quot;, &quot;app&quot;, &quot;knockout-amd-helpers&quot;, &quot;text&quot;], function (ko, App) {
+    ko.bindingHandlers.module.baseDir = &quot;modules&quot;;
+
+    //fruits/vegetable modules have embedded template
+    ko.bindingHandlers.module.templateProperty = &quot;embeddedTemplate&quot;;
+});
+
+require(['AppRouter'], function(){
+});
+
+
+    </pre> 
+   </div> 
+  </div>
+ </body>
+</html>

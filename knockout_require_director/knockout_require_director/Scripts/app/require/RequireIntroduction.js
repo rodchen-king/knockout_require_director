@@ -1,15 +1,19 @@
-/*  
-    jsÔ´´úÂë.
-    Description: The js is for testing require.
- */
-define(function () {
+ï»¿define(function () {
     function RequireIntroductionViewModel() {
-    var self = this;
+        var self = this;
 
-    self.TestRequireJs = function () {
-        alert("The function is in RequireIntroduction.js!");
+        self.init = function () { };
+
+        self.controllers = {
+            '/': function () { }
+        };
+
+        self.afterRender = function (element) {
+            console.log("Successful to load RequireIntroductionViewModel page");
+        };
+
     }
-  }
 
-return new RequireIntroductionViewModel();
+    return new RequireIntroductionViewModel();
+
 });

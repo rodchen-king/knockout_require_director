@@ -1,5 +1,15 @@
 define({
-    '/testDirectorFirst': function () { console.log("This is the url for testDirectorFirst") },
-    '/testDirectorSecond': function () { console.log("This is the url for testDirectorSecond") },
-    '/testDirectorThird': function () { console.log("This is the url for testDirectorThird") }
+	'/error404/:code': 'Error /',
+	'/Boke/index': 'CustomerIntroduction /',
+	'/': 'CustomerIntroduction /',
+
+    //Customer
+	'/Boke/CustomerIntroduction': 'CustomerIntroduction /',
+
+    //Require
+	'/Boke/RequireIntroduction': 'RequireIntroduction /',
+	'/Boke/RequireCode': 'RequireCode /',
+
+    //Javascript
+	'/Boke/UnknowJavascriptSecond': 'UnknowJavascriptSecond /'
 })

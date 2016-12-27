@@ -1,0 +1,151 @@
+﻿<h3>类型</h3><br/>
+
+<pre>1. Javascript有7中内置类型：
+    空值（null）
+    未定义（undefined）
+    布尔值（boolean）
+    数字（number）
+    字符串（string）
+    对象（object）
+    符号（symbol，ES6中新增）
+
+    除对象之外，其他的统称为“基本类型”。
+</pre>
+<font style="color: red">Note:</br> null类型比较特殊，typeof null === "object".</font>
+<pre>2. 检测null值得类型
+    var a = null;
+    (!a && typeof a === "object") // true
+
+    null 是基本类型中的唯一一个“假值” ？
+
+3. typeof function a(){} === "function"; // true.
+   这样看来，function也是javscript中的一个内置类型。实际上是object中的一个子类型。具体来说，函数是一个“可调用对象”，它有一个内部属性[[Call]]，该属性可以使其可以被调用.
+
+4. 函数对象的length对象是其声明的参数的个数。
+
+5. typeof [1, 2, 3] === "object" //true.
+</pre>
+<font style="color: red">Note:</br> 为什么2是唯一一个假值？</br> 3中的原因？</font>
+<pre>6. Javscript中的变量是没有类型的，只有值才有。变量可以随时持有任何类型的值。 换个角度来理解就是，javascript不做“类型强制”；也就是说，语言引擎不要求变量总是持有与初始值
+同类型的值。
+    在对变量执行typeof时，得到的结果是变量持有的值得类型。
+</pre>
+<font style="color:red">Note:</br>值可以通过强制类型转换转为其他的类型。</font>
+<pre>7. 作用域中声明但是没没有赋值的变量，是undefined，相反没有在作用域中声明的变量，是undeclared。但是typeof在处理这两种情况是，都是undefined。
+    调用时会发现对于undeclared，<font style="color: green">Uncaught ReferenceError: a is not defined</font>
+8. typeof的安全防护机制（组织报错）来检查undeclared变量？
+</pre>
+<font style="color:red">Note:</br>typeof的安全防护机制（组织报错？</font>
+
+<br/><h3>值</h3><br/>
+<pre>9. 数组
+    与其他强类型语言不通，在javascript中，数组可以容纳任何类型的值。使用delete运算符可以将单元从数组中删除，但是请注意，单元删除后数组的length是不会发生变化。值
+成为了undefined。
+    如果字符串键值能够强制类型装换为十进制数字的话，他就会当做数字索引来处理。
+
+10. 数组添加和删除：
+    数组尾部：push，pop
+    数组头部：unshift（添加），shift
+
+    按照数组索引的顺序传递进行遍历，最常用的方法forEach()
+
+    多维数组： javascript不支持真正的多维数组，使用数组的数组来近似。
+
+    数组的常用方法：红颜色的方法是会产生新的数组
+    join(param):将数组中所有元素都转化为字符串并连接起来。Param表示以什么符号进行连接，默认使用逗号。
+    reverse(): 将数组的元素颠倒顺序，然后返回。 PS:返回的还是原来的数组，并不会产生新的数组。
+    sort(): 将数组元素排序并返回排序后的数组（原来的数组，不会产生新的数组）。默认元素以字母顺序进行排序（可以穿进去一个比较函数进行排序）
+    <font style="color: red">concat</font>(): 将数组创建并返回一个新的数组，如果参数中含有数组，则传递的是数组的元素，而不是数组本身。也不会改变调用的数组。 
+              var a = [1, 2, 3]; a.concat(4, [5, [6, 7]]) -》 [1, 2, 3 , 4, 5, [6, 7]];
+    <font style="color:red">slice</font>(a, b): a:开始位置， b: 第二个元素指定的位置（索引，不含这个元素），如果为负数那就是从最后开始的第几个位置不包含。返回的是一个新的数组。
+
+    *splice(): 在当前数组中插入或者删除元素的通用方法。不产生新的数组。
+       a. 一个参数的时候，表示开始截取数组的索引位置。返回的是截取的数组。
+       b. 两个参数的时候，第一个参数不变，第二个参数表示的是截取几个元素。返回的截取的元素。
+       c. 大于两个参数的时候，后面的参数插入的元素值，如果之前插入的位置没有值，则返回的是[],如果原先有值，则返回的是原先的值。
+
+    pop, push, shift, unshift操作的是原来的数组,不会产生新的数组。
+    toString(): 输出用逗号分隔的字符串列表，输出不会包含方括号或者其他形式的包裹数组数值的分隔符。
+
+- ECMAScript 5的数组方法：
+    （1）forEach(): 只有一个参数时，传入的是数组元素。
+                        三个参数时（v, i, a）:第一个是数组元素，第二个是数组索引，第三个是数组本身。
+                       forEach不能否在数组遍历完前终止遍历，除非把forEach（）方法放在一个try块中，并能抛出一个异常。
+                       function foreach(a,f,t){
+                            try { a.forEach(f,t); }
+                            catch(e){
+                                   if(e === foreach.break)return;
+                                  else throw e;
+                            }
+                       }
+
+                        foreach.break = new Error("StopIteration");
+                        var　a = [1, 2, 3, 4, 5];
+                        foreach(a, function(value){
+                                if (value == 3) {
+                                        throw foreach.break;
+                                }
+                        })
+    （2）map:调用数组的每个元素传递给指定的函数，并返回一个新数组，不影响原先数组的元素。
+    （3）filter: 返回的数组元素是调用的数组的一个子集，传递的函数是用来逻辑判定的。
+              使用filter去过滤稀疏数组中缺少的元素：var dense = space.split(function(){ return true; });
+              使用filter压缩空缺并删除undefined, null元素，var a = a.filter(function(x){ return x !== undefind && x != null })
+    （4）every, some: 数组的逻辑判断，返回true，false。
+    （5）reduce()：使用指定的函数将数组元素进行组合，生成单个值。先计算前两个值，计算结果之后在于第三个元素进行运算。reduceRight():按照索引的顺序从高到低（从右到左）.
+    （6）indexOf(): 搜素元在数组中的位置，返回第一个元素的索引，没有找到则返回-1，lastIndexOf(): 从数末尾进行搜索。存在第二个参数，指定一个索引，并从当前这个索引的位置进行搜索。
+</pre>
+</br>
+
+<pre>11. 字符串： 字符串经常被当做字符数组，在javascript中字符串和字符数组并不是一回事，最多只是看上去相似而已。
+    * 字符串和数组都具有length属性，indexof()和contact方法。
+    * Javascript中字符串是不可变的，而数组是可变的，并且a[1]在javascript中并非是总是合法的语法，在老版本的iE中就不被允许（现在可以了）。正确的方法应该是a.charAt(1),而数组中大部分都是在其原始值上进行操作。
+    * 许多数组函数用来处理字符串很方便。虽然字符串没有这些函数，但是可以通过“借用”数组非变更方法来处理字符串。
+        Array.prototype.Join(a, "-");
+    * 另一个不同点是用于字符串反转（reverse()）; 无法借用数组的可变更成员函数，因为字符串是不可变的。
+</pre>
+
+<pre>12. 数字number：javascript只有一种数值类型，包括“整数”和带有小数的十进制数。
+    * javascript中没有真正意义上的整数。
+    * 函数
+        （1）a.toExponential()            : 表示以E10表示
+        （2）a.toFixed(/*argument*/)      : 指定小数部分的显示位数。
+        （3）a.toPrecision(/*argument*/)  : 表示有效数位的显示位数。 
+
+13.较小的数值 二进制浮点数最大的问题（不仅是javascript,所有遵循IEEE754规范的语言都是如此）。
+   0.1 + 0.2 === 0.3 //false
+   <font style="color: red">从数学的角度来说，上面的判断应该是true，可结果为什么是false。 简单来说，二进制浮点数中0.1和0.2并不是身份正确，他们相加的结果是0.3000000000000004.
+   </font>
+    * 从ES6中存在Number.EPSILON中，只要是两个值得误差在这个值内就可以认为是相等的。 Math.abs(n1 - n2) < Number.EPSLON
+    * 要检测一个值是否是安全的整数可以使用（ES6）Number.isInteger()方法，或者ES6之前的 typeof num == "number" && number % 1 == 0;
+    * 检测一个值是否是安全整数，number.isInteger(num) && Math.abs(num) <= Number.MAX_SAFE_INTEGER
+
+14. 特殊数值：
+    * null， undefined，它们的名称即是类型也是值。 null是一个特殊关键字，我们不能当做变量来使用或者赋值。然而undefined是一个标识符，可以当做变量来使用和赋值。
+    * viod, 是一个内置标识符，它的值为undefined，表达式void—— 没有返回值。
+
+15. 特殊的数值：
+    * 表示不是数字的数字，但是NaN仍然是一个数字类型。JavaScript中的唯一一个不等于自身的值。
+    * Es6中新加了一个Object.is()来判断两个值是否绝对相等。Object(a, NaN) , Object.is(b, -0).
+
+16.值和引用：
+    javaScript中没有指针，引用的工作机制也不尽相同。在javascript中变量不可能成为另一个变量的引用。
+
+    var a = 10; 
+    var b = a; //b是a的值得一个副本
+
+    var c = [1, 2, 3];
+    var d = c; //d是[1,2,3]的一个引用
+    
+    <font style="color:red">*javascript中简单值总是通过值赋值的方式来赋值/传递。
+    *复合值（对象）和函数，则指向对象的一个引用，与原来的a没有任何关系。 由于引用指向的是指本身而不是变量，所以一个引用无法更改另一个引用的指向。
+    *函数传递参数的时候，只是传递的是一个值得副本，与原先的值没有任何关系，不会更改原先变量持有的值。
+    </font>
+</pre>
+<h3>原生函数</h3>
+<pre>  17. <font color="red">Importantly,  typeof shows that these objects are not their own spe‐cial types, but more appropriately they are subtypes of the  object</font>
+    * 内部属性[[class]]： 所有typeof返回值为“object”的对象都包含一个内部属性[[class]]，这个属性无法直接访问，一般可以通过Object.prototype.toString()来查看。
+    * 封装对象包装： 由于基本类型值没有.length和.toString()这样的方法，需要通过封装对象才能访问，此时JavaScript会自动为基本类型值包装一个封装对象。
+    * <font color="red">对于Boolean对象的封装对象，该对象值是真值，和基本类型值得行为不相同。</font>
+
+    18.构造函数Array()不要求必须带new关键字，不带时，会自动补上。Array构造函数只带有一个数字参数的时候，该参数会被当做数组的预设长度，而非只充当数组中的一个元素。<br />更为关键的是数组并没有预设长度这个概念，这样创建的只是一个空数组，只是带有属性length为指定数值，反而形成了一个稀疏数组。
+</pre>

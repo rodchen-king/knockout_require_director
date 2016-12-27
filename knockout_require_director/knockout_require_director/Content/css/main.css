@@ -1,0 +1,91 @@
+﻿body {
+
+}
+
+#main div {
+    
+}
+
+#main pre {
+    font-family: Courier New!important;
+    font-size: 12px!important;
+    background-color: white;
+}
+
+#main .cnblogs_code {
+    background-color: #F8F8EE;
+    border: 1px dashed #CCCCCC;
+    padding: 5px 5px 5px 5px;
+}
+
+.main_container {
+    position: relative;
+}
+
+
+/***************Animation Code*****************/
+ul, li {
+    margin: 0px;
+    padding: 0px;
+}
+
+#animationCode {
+    width:100%;
+    height:100%;
+    position:relative;
+    border: 1px solid solid;
+    min-height: 600px;
+    overflow:hidden;  
+}
+
+#animationCode ul {
+    min-height: inherit;      
+}
+
+#animationCode li {
+    list-style-type: none;
+    width: 100%;
+    height: 100%;
+    float: left;
+    background: #CAE1FF;
+    position: relative;
+    max-height: 560px;
+}
+
+#animationCode li:nth-child(2) {
+    background: #9BCD9B;
+}
+
+#animationCode li:nth-child(3) {
+    background: yellow;
+}
+
+/*AddNewVisit*/
+input.error {
+    border:1px solid red;
+}
+
+/*Model loading*/
+.loading-bg {
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    background: #000;
+    background: rgba(0, 0, 0, 0.1);
+    z-index: 20000;
+    display: none;
+    top: 0;
+    left: 0;
+}
+
+.ajax-loading-icon {
+    background: url(../images/icon-spinner.gif) no-repeat 50% 50%;
+    background-size: 50px 50px;
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    position: fixed;
+    top: 200px;
+    left: 45%;
+    z-index: 9999;
+}

@@ -10,20 +10,21 @@ define(['knockout', 'jquery', 'Router', 'Custom'], function (ko, $, Router) {
 	}
 
 	var app = {
-		init: function(name, data, controller) {
+	    initJS: function (pageName) {
+	        require([pageName + '-js'], function (page) {
+	            app.init(pageName, page);
+	        });
+	    },
+		init: function(pageName, pageData) {
 			if (isEndSharp()) {
 				return;
 			}
 
-			data.init(); // init view model and call controller (optional) before template is swapped-in
-
-			if (controller) {
-				controller(data);
-			}
+			pageData.init(); // init view model and call controller (optional) before template is swapped-in
 
 			app.page({
-				name: name,
-				data: data
+			    name: pageName,
+			    data: pageData
 			}); // to test if template finished rendering, use afterRender binding in the template binding
 
 			if (initialRun) {

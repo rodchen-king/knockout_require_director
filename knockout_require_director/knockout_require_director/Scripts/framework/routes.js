@@ -1,15 +1,15 @@
 define({
 	'/error404/:code': 'Error /',
-	'/Boke/index': 'CustomerIntroduction /',
+	'/index': 'CustomerIntroduction /',
 	'/': 'CustomerIntroduction /',
 
     //Customer
-	'/Boke/CustomerIntroduction': 'CustomerIntroduction /',
+	'/CustomerIntroduction': 'CustomerIntroduction /',
 
     //Require
-	'/Boke/RequireIntroduction': 'RequireIntroduction /',
-	'/Boke/RequireCode': 'RequireCode /',
+	'/RequireIntroduction': 'RequireIntroduction /',
+	'/RequireCode': 'RequireCode /',
 
     //Javascript
-	'/Boke/UnknowJavascriptSecond': 'UnknowJavascriptSecond /'
+	'/UnknowJavascriptSecond': 'UnknowJavascriptSecond /'
 })

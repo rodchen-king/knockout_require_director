@@ -1,4 +1,4 @@
-﻿define(['knockout', 'app'], function (ko, app) {
+﻿define(['knockout'], function (ko) {
     function CustomerIntroductionViewModel() {
         var self = this;
 
@@ -16,7 +16,6 @@
         self.afterRender = function (element) {
             console.log("Successful to load CustomerIntroductionViewModel page");
         };
-
     }
 
     return new CustomerIntroductionViewModel();

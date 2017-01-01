@@ -20,23 +20,22 @@ define(['knockout', 'jquery', 'Router', 'Custom'], function (ko, $, Router) {
 				return;
 			}
 
-			pageData.init(); // init view model and call controller (optional) before template is swapped-in
+			pageData.init(); 
 
 			app.page({
 			    name: pageName,
 			    data: pageData
-			}); // to test if template finished rendering, use afterRender binding in the template binding
+			}); 
 
 			if (initialRun) {
-				ko.applyBindings(app, document.getElementsByTagName('html')[0]); // apply binding at root node to be able to bind to anywhere
+				ko.applyBindings(app, document.getElementsByTagName('html')[0]); 
 				initialRun = false;
 			}
 		},
 		page: ko.observable({
-			name: '', // name of the page - auto-set by the framework, no need to worry
+			name: '', 
 			data: {
-				init: function() {}, // preparation before the page's template is rendered, such as checking access control, init/instantiate modules used by the page, etc.
-				dispose: function() {} // properly dispose the page to prevent memory leaks and UI leftovers (important for SPA since page doesn't refresh between page views) - remove DOM element event listeners, dispose knockout manual subscriptions, etc.
+				init: function() {}
 			}
 		}),
 		

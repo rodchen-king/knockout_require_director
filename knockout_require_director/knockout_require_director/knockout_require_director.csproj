@@ -126,8 +126,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\Property.cs" />
-    <Compile Include="Models\Visit.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -139,6 +137,8 @@
     <Content Include="Content\css\customer\swipebox.css" />
     <Content Include="Content\css\main.css" />
     <Content Include="Content\images\123.jpg" />
+    <Content Include="Content\images\1.jpg" />
+    <Content Include="Content\images\404.jpg" />
     <Content Include="Content\images\american-express.png" />
     <Content Include="Content\images\b1.jpg" />
     <Content Include="Content\images\b2.jpg" />
@@ -157,7 +157,6 @@
     <Content Include="Content\images\g9.jpg" />
     <Content Include="Content\images\icon-spinner.gif" />
     <Content Include="Content\images\icons.png" />
-    <Content Include="Content\images\1.jpg" />
     <Content Include="Content\images\inbox.png" />
     <Content Include="Content\images\mastercard.png" />
     <Content Include="Content\images\media.jpg" />
@@ -3598,7 +3597,7 @@
     <Content Include="Scripts\app\require\RequireCode.js" />
     <Content Include="Scripts\app\require\RequireIntroduction.js" />
     <Content Include="Scripts\framework\main.js" />
-    <Content Include="Scripts\framework\page.js" />
+    <Content Include="Scripts\framework\webPageContrl.js" />
     <Content Include="Scripts\framework\router.js" />
     <Content Include="Scripts\framework\routes.js" />
     <Content Include="Scripts\lib\knockout.validation.js" />
@@ -4484,6 +4483,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

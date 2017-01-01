@@ -1,4 +1,4 @@
-﻿define(['knockout', 'app'], function (ko, app) {
+﻿define(['knockout'], function (ko) {
     function UnknowJavascriptSecondViewModel() {
         var self = this;
         self.VisitInfo = ko.observableArray(null);

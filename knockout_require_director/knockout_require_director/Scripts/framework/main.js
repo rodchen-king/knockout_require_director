@@ -14,7 +14,7 @@ var paths = {
 
 //framework
 'Router': 'Scripts/lib/director',
-'app': 'Scripts/framework/page',
+'WebPageContrl': 'Scripts/framework/webPageContrl',
 'AppRouter': 'Scripts/framework/router',
 'Error-js': 'Scripts/app/Error',
 'Error-html': 'templates/Error-html.html',
@@ -28,8 +28,6 @@ var paths = {
 //Customer
 'CustomerIntroduction-html': 'templates/customer/CustomerIntroduction.html',
 'CustomerIntroduction-js': 'Scripts/app/customer/CustomerIntroduction',
-'customer-information-html': 'templates/customer/components/CustomerInformation.html',
-'customer-information-js': 'Scripts/app/customer/components/CustomerInformation',
 
  //require
 'RequireIntroduction-html': 'templates/require/RequireIntroduction.html',
@@ -61,7 +59,7 @@ require.config({
 	}
 });
 
-require(["knockout", "app", "knockout-amd-helpers", "text"], function (ko, App) {
+require(["knockout", "knockout-amd-helpers", "text"], function (ko) {
     ko.bindingHandlers.module.baseDir = "modules";
 
     //fruits/vegetable modules have embedded template

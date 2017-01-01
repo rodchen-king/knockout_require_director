@@ -1,7 +1,7 @@
 define({
 	'/error404/:code': 'Error /',
-	'/index': 'CustomerIntroduction /',
 	'/': 'CustomerIntroduction /',
+	'': 'CustomerIntroduction /',
 
     //Customer
 	'/CustomerIntroduction': 'CustomerIntroduction /',

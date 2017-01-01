@@ -1,12 +1,11 @@
-define(['app', 'Routes', 'Router', 'jquery'], function(app, Routes, Router) {
+define(['WebPageContrl', 'Routes', 'Router'], function (WebPageContrl, Routes, Router) {
 	var routes = {};
-    /*遍历整个路由数组，在routes中记录所有的路由信息。*/
+    /*遍历整个路由对象，在routes中记录所有的路由信息。*/
 	$.each(Routes, function(key, value) {
 		var values = value.split(' ');
 		var pageName = values[0];
-		var controllerName = values[1];
 		routes[key] = function() {
-		    app.initJS(pageName);
+		    WebPageContrl.initJS(pageName);
 		};
 	});
 
@@ -25,7 +24,6 @@ define(['app', 'Routes', 'Router', 'jquery'], function(app, Routes, Router) {
 	} else {
 		router.init('/');
 	}
-
 
 	return router;
 });

@@ -11,9 +11,7 @@
         self.afterRender = function (element) {
             console.log("Successful to load RequireIntroductionViewModel page");
         };
-
     }
 
     return new RequireIntroductionViewModel();
-
 });

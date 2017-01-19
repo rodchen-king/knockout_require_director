@@ -1,0 +1,78 @@
+//IBV Data Capture.
+        IBVDataCaptureMmodel: (function() {
+            var IbvModel = {};
+
+            return {
+                InitializeIbvMmodel: function () {
+                    IbvModel = {
+                        PaymentMadeByIbv: false,
+
+                        BankAccountHolderName: '',
+                        BankAccountType: '',
+                        BankRoutingName: '',
+                        BankAccountNumber: '',
+                        BankBlance: 0,
+
+                        YodleeApiCallForThisTransaction: false,
+                        TimeOfYodleeApiCall: null,
+
+                        ApiCallType: 'N/A',
+
+                        CostPerApiCall: 0,
+
+                        ApiCpdeReturned: '',
+                        YodleeTokenReturned: '',
+
+                        BankAccountHolderNameManuallyEnteredByCustomer: '',
+                        AccountTypeManuallyEnteredByCustomer: '',
+                        RoutingNumberEnteredByCustomer: '',
+                        BankAccountNumberEnteredByCustomer: '',
+                        BankNameEnteredByCustomer: ''
+                    };
+                },
+                InitializeIbvCaptureModelForTransaction: function (IsYodleeApiForTheTransaction) {
+                    this.InitializeIbvMmodel();
+                    IbvModel.TransactionUniqueCode = localStorage.getItem("TransactionUniqueCode");
+
+                    if (IsYodleeApiForTheTransaction) {
+                        IbvModel.YodleeApiCallForThisTransaction = true;
+                        IbvModel.TimeOfYodleeApiCall = clientScript.GetDateTimeOffset();
+                    }
+                },
+                SetInformationFormYodleeApi: function ( /*The response from yodlee api call*/ yodleeObject) {
+                    IbvModel.BankAccountHolderName = yodleeObject.AccountName;
+                    IbvModel.BankAccountType = yodleeObject.AccountType;
+                    IbvModel.BankRoutingName = yodleeObject.AccountId;
+                    IbvModel.BankAccountNumber = yodleeObject.AccountNumber;
+                    IbvModel.BankBlance = yodleeObject.AvailableBalance.Amount;
+                },
+                SetInformationUserEntered: function ( /*The information uesr enterd*/ userConfirmObjet) {
+                    IbvModel.BankAccountHolderNameManuallyEnteredByCustomer = null;
+                    IbvModel.AccountTypeManuallyEnteredByCustomer = userConfirmObjet.AccountTypeId;
+                    IbvModel.RoutingNumberEnteredByCustomer = userConfirmObjet.AccountRoutingNumber;
+                    IbvModel.BankAccountNumberEnteredByCustomer = userConfirmObjet.CardNumber;
+                    IbvModel.BankNameEnteredByCustomer = null;
+
+                    this.PostDataToDataCaptureRestful(IbvModel);
+                },
+                PostDataToDataCaptureRestful: function (IbvDataCaptureObject) {
+                        if (!(localStorage.getItem("DataCaptureConfigure") && JSON.parse(localStorage.getItem("DataCaptureConfigure")).IsEnabled)) {
+                            return;
+                        }
+
+                        $.ajax({
+                            url: localStorage.getItem("DataCaptureServerUrl") + '/DataCapture/LogTransactionIbvActivity',
+                            dataType: "json",
+                            type: "POST",
+                            contentType: "application/json",
+                            data: JSON.stringify(IbvDataCaptureObject)
+                        })
+                        .done(function (result) {
+                            //To do nothing.
+                        })
+                        .fail(function (xhr, status) {
+                        });
+                    },
+
+            }
+        })(),

@@ -1,0 +1,79 @@
+USE [MoneyTransferCore]
+GO
+
+SET ANSI_NULLS ON
+GO
+IF EXISTS (SELECT  FROM tempdb..sysobjects WHERE id = OBJECT_ID('tempdb..#tmpErrors')) DROP TABLE #tmpErrors
+GO
+CREATE TABLE #tmpErrors (Error INT)
+SET QUOTED_IDENTIFIER ON
+GO
+SET TRANSACTION ISOLATION LEVEL READ COMMITTED
+GO
+BEGIN TRANSACTION
+GO
+
+PRINT N'CREATE SYNONYM [dbo].[transaction_ibv_activity]';
+IF  EXISTS (SELECT  FROM sys.synonyms WHERE name = N'transaction_ibv_activity')
+    DROP SYNONYM [dbo].[transaction_ibv_activity]
+GO
+CREATE SYNONYM [dbo].[transaction_ibv_activity] FOR [DataCapture].[dbo].[transaction_ibv_activity]
+GO
+
+PRINT N'CREATE SYNONYM [dbo].[transaction_ibv_cost]';
+IF  EXISTS (SELECT  FROM sys.synonyms WHERE name = N'transaction_ibv_cost')
+    DROP SYNONYM [dbo].[transaction_ibv_cost]
+GO
+CREATE SYNONYM [dbo].[transaction_ibv_cost] FOR [DataCapture].[dbo].[transaction_ibv_cost]
+GO
+
+PRINT N'CREATE SYNONYM [dbo].[transaction_ibv_card_info]';
+IF  EXISTS (SELECT  FROM sys.synonyms WHERE name = N'transaction_ibv_card_info')
+    DROP SYNONYM [dbo].[transaction_ibv_card_info]
+GO
+CREATE SYNONYM [dbo].[transaction_ibv_card_info] FOR [DataCapture].[dbo].[transaction_ibv_card_info]
+GO
+
+IF EXISTS (SELECT  FROM dbo.SysObjects WHERE ID = object_id(N'vw_ui_ibv_transaction_report') AND OBJECTPROPERTY(ID, 'IsView') = 1) 
+BEGIN
+	DROP VIEW vw_ui_ibv_transaction_report
+END
+GO
+
+CREATE VIEW [dbo].[vw_ui_ibv_transaction_report] 
+AS
+
+select 
+ 
+from 
+transaction_ibv_cost 
+group by ibv_
+
+select 
+	 
+from 
+	transaction_ibv_cost tic
+left join
+	transaction_ibv_card_info tici
+on tic.ibv_call_unique_code = tici.ibv_call_unique_code
+
+
+select  from 
+
+
+GO
+
+IF @@ERROR  0 AND @@TRANCOUNT  0 BEGIN ROLLBACK; END
+IF @@TRANCOUNT = 0 BEGIN INSERT  INTO #tmpErrors (Error) VALUES (1); BEGIN TRANSACTION; END
+GO
+
+IF EXISTS (SELECT  FROM #tmpErrors) ROLLBACK TRANSACTION
+GO
+IF @@TRANCOUNT0 BEGIN
+PRINT 'Update succeeded.'
+COMMIT TRANSACTION
+END
+ELSE PRINT 'Update failed.'
+GO
+DROP TABLE #tmpErrors
+GO

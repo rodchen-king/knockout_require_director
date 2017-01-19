@@ -3596,6 +3596,7 @@
     <Content Include="Scripts\app\javascript\UnknowJavascriptSecond.js" />
     <Content Include="Scripts\app\require\RequireCode.js" />
     <Content Include="Scripts\app\require\RequireIntroduction.js" />
+    <Content Include="Scripts\CustomerRequirejs.js" />
     <Content Include="Scripts\framework\main.js" />
     <Content Include="Scripts\framework\webPageContrl.js" />
     <Content Include="Scripts\framework\router.js" />
